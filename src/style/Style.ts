@@ -1,30 +1,60 @@
 import styled from "styled-components";
+import { breakpoints } from "./breakPoint";
 
 export const AppWrapper = styled.div`
   background: linear-gradient(45deg, #08aeea, #b721ff);
-  padding: 10px 100px 50px 100px;
+
   display: flex;
   justify-content: center;
   min-height: 680px;
-  font-size: 16px;
+
+  @media screen and (min-width: ${breakpoints.phone}) {
+    font-size: 14px;
+    padding: 5px 15px 5px 15px;
+  }
+
+  @media screen and (min-width: ${breakpoints.desktop}) {
+    font-size: 16px;
+    padding: 10px 100px 50px 100px;
+  }
 `;
 
 export const Div = styled.div`
-  width: 900px;
   display: flex;
+  justify-content: center;
+
+  @media screen and (min-width: ${breakpoints.tablet}) {
+    width: 600px;
+  }
+
+  @media screen and (min-width: ${breakpoints.desktop}) {
+    width: 900px;
+  }
 `;
 
-export const ComponentWrapper = styled.div<{ justifycontent?: string }>`
-  width: 800px;
-  margin-top: 30px;
+export const ComponentWrapper = styled.div<{
+  flexdirection?: string;
+}>`
   display: flex;
-  justify-content: ${(props) =>
-    props.justifycontent ? "center" : "space-between"};
+  justify-content: center;
+  align-items: flex-start;
+
+  flex-direction: ${(props) => (props.flexdirection ? "center" : "column")};
+
+  @media screen and (min-width: ${breakpoints.phone}) {
+    width: 350px;
+  }
+
+  @media screen and (min-width: ${breakpoints.tablet}) {
+    width: 450px;
+  }
+
+  @media screen and (min-width: ${breakpoints.desktop}) {
+    width: 600px;
+  }
 `;
 
 export const Input = styled.input`
-  height: 50px;
-  width: 600px;
   background-color: #e5e5e5;
   border: none;
   outline: none;
@@ -33,6 +63,20 @@ export const Input = styled.input`
   line-height: 50px;
   padding: 0 15px;
   box-sizing: border-box;
+
+  @media screen and (min-width: ${breakpoints.phone}) {
+    width: 350px;
+    height: 40px;
+  }
+
+  @media screen and (min-width: ${breakpoints.tablet}) {
+    width: 450px;
+    height: 50px;
+  }
+
+  @media screen and (min-width: ${breakpoints.desktop}) {
+    width: 600px;
+  }
 `;
 
 export const Form = styled.form`
@@ -43,8 +87,15 @@ export const Form = styled.form`
   background-color: #fff;
   border-radius: 10px;
   padding: 5px 5px 15px;
-  width: 850px;
   min-height: 500px;
+
+  @media screen and (min-width: ${breakpoints.tablet}) {
+    width: 600px;
+  }
+
+  @media screen and (min-width: ${breakpoints.desktop}) {
+    width: 850px;
+  }
 `;
 export const SubmitButton = styled.button`
   height: 50px;
@@ -59,7 +110,6 @@ export const SubmitButton = styled.button`
 
 export const Select = styled.select`
   height: 50px;
-  width: 600px;
   background-color: #e5e5e5;
   border: none;
   outline: none;
@@ -68,20 +118,48 @@ export const Select = styled.select`
   cursor: pointer;
   padding: 0 15px;
   box-sizing: border-box;
+
+  @media screen and (min-width: ${breakpoints.phone}) {
+    width: 350px;
+    height: 40px;
+  }
+
+  @media screen and (min-width: ${breakpoints.tablet}) {
+    width: 450px;
+  }
+
+  @media screen and (min-width: ${breakpoints.desktop}) {
+    width: 600px;
+  }
 `;
 
 export const RadioBtnWrapper = styled.div`
   display: flex;
   margin-top: 15px;
+
+  @media screen and (min-width: ${breakpoints.phone}) {
+    width: 350px;
+  }
+
+  @media screen and (min-width: ${breakpoints.tablet}) {
+    width: 450px;
+  }
+
+  @media screen and (min-width: ${breakpoints.desktop}) {
+    width: 600px;
+  }
 `;
 
 export const RadioWrapper = styled.label`
   display: flex;
   align-items: center;
-  margin-left: 240px;
+  margin-right: 100px;
   cursor: pointer;
   user-select: none;
-  // margin-left: 80px;
+
+  @media screen and (min-width: ${breakpoints.phone}) {
+    margin-right: 80px;
+  }
 `;
 
 export const RadioInput = styled.input`
@@ -131,4 +209,5 @@ export const LinkText = styled.a`
 
 export const ParagraghText = styled.p`
   font-weight: 600;
+  text-align: left;
 `;

@@ -36,10 +36,10 @@ export const LoginForm = ({
           onChange={(e) => changePassword(e, "singin")}
         />
       </ComponentWrapper>
-      <ComponentWrapper justifycontent="center">
+      <ComponentWrapper flexdirection="center">
         <Link to="/signup">新規登録はこちら</Link>
       </ComponentWrapper>
-      <ComponentWrapper justifycontent="center">
+      <ComponentWrapper flexdirection="center">
         <LinkText>パスワードを忘れた方はこちら</LinkText>
       </ComponentWrapper>
       <SubmitButton type="submit">新規登録する</SubmitButton>

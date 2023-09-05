@@ -104,20 +104,20 @@ export const RegistrationForm = ({
           </RadioWrapper>
         </RadioBtnWrapper>
       </ComponentWrapper>
-      <ComponentWrapper justifycontent="center">
+      <ComponentWrapper flexdirection={"center"}>
         <input
           type="checkbox"
-          id="scales"
-          name="scales"
+          id="agreement"
+          name="agreement"
           checked={state.agree}
           onChange={(e) => agreeTermsAndCondition(e)}
         />
         <LinkText href="https://menherasenpai.notion.site/457df49475494671807673a0a3346451">
           利用規約
         </LinkText>
-        <label htmlFor="scales">に同意します。</label>
+        <label htmlFor="agreement">に同意します。</label>
       </ComponentWrapper>
-      <ComponentWrapper justifycontent="center">
+      <ComponentWrapper flexdirection="center">
         <Link to="/signin">既にユーザー登録を完了している方はこちら</Link>
       </ComponentWrapper>
       <SubmitButton type="submit">新規登録する</SubmitButton>
