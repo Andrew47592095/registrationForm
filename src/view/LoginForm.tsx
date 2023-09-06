@@ -17,7 +17,7 @@ export const LoginForm = ({
   state,
 }: LoginProps) => {
   return (
-    <Form onSubmit={(e) => handleSubmit(e)}>
+    <Form onSubmit={(e) => handleSubmit(e, "signin")}>
       <ComponentWrapper>
         <ParagraghText>メールアドレス：</ParagraghText>
         <Input

@@ -29,7 +29,7 @@ export const RegistrationForm = ({
   handleSubmit,
 }: RegisterProps) => {
   return (
-    <Form onSubmit={(e) => handleSubmit(e)}>
+    <Form onSubmit={(e) => handleSubmit(e, "register")}>
       <ComponentWrapper>
         <ParagraghText>ユーザー名：</ParagraghText>
         <Input
@@ -51,7 +51,7 @@ export const RegistrationForm = ({
         <Input
           type="password"
           placeholder="パスワード"
-          onChange={(e) => changePassword(e, "singup")}
+          onChange={(e) => changePassword(e, "signup")}
         />
       </ComponentWrapper>
       <ComponentWrapper>
@@ -63,9 +63,12 @@ export const RegistrationForm = ({
         />
       </ComponentWrapper>
       <ComponentWrapper>
+        {/* NOTE: アイコンのselectタグのselectedのロジック部分の処理を追加する */}
         <ParagraghText>アイコン：</ParagraghText>
         <Select name="icon" onChange={(e) => selectIcon(e)}>
-          <option value="cat">🐱</option>
+          <option value="cat" selected>
+            🐱
+          </option>
           <option value="dog">🐶</option>
           <option value="horse">🐴</option>
           <option value="pig">🐷</option>

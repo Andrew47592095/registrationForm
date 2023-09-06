@@ -7,7 +7,12 @@ import {
   registerReducer,
 } from "./utilis/RegisterReducer";
 import { initialLoginValue, loginReducer } from "./utilis/LoginReducer";
+import { auth } from "./firebase/firebase";
 import { useReducer } from "react";
+import {
+  createUserWithEmailAndPassword,
+  updateCurrentUser,
+} from "firebase/auth";
 
 function App() {
   const [registerState, registerDispatch] = useReducer(
@@ -95,14 +100,41 @@ function App() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent, authType: string) => {
     e.preventDefault();
-    registerDispatch({
-      type: "SUBMIT",
-      userInfo: registerState,
-    });
 
-    console.log("Form submitted with state:", registerState);
+    if (authType === "signup") {
+      registerDispatch({
+        type: "SUBMIT",
+        userInfo: registerState,
+      });
+    }
+
+    // try {
+    //   const userCredential = await createUserWithEmailAndPassword(
+    //   auth,
+    //   registerState.emailAddress,
+    //   registerState.password
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    console.log(registerState);
+
+    onSubmit(registerState.emailAddress, registerState.password);
+  };
+
+  const onSubmit = async (email: string, password: string) => {
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+
+      });
   };
 
   return (
