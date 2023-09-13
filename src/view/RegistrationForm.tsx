@@ -15,6 +15,7 @@ import {
   ParagraghText
 } from "../style/Style";
 import { RegisterProps } from "../utilis/types";
+import { Loading } from "../component/Loading";
 
 export const RegistrationForm = ({
   state,
@@ -29,9 +30,9 @@ export const RegistrationForm = ({
   handleSubmit,
 }: RegisterProps) => {
   return (
-    <Form onSubmit={(e) => handleSubmit(e, "register")}>
+    <Form onSubmit={(e) => handleSubmit(e, "signup")}>
+      {state.isSubmitted && <Loading />}
       <ComponentWrapper>
-        <ParagraghText>ユーザー名：</ParagraghText>
         <Input
           type="text"
           placeholder="ユーザー名"
@@ -39,7 +40,6 @@ export const RegistrationForm = ({
         />
       </ComponentWrapper>
       <ComponentWrapper>
-        <ParagraghText>メールアドレス：</ParagraghText>
         <Input
           type="email"
           placeholder="メールアドレス"
@@ -47,7 +47,6 @@ export const RegistrationForm = ({
         />
       </ComponentWrapper>
       <ComponentWrapper>
-        <ParagraghText>パスワード：</ParagraghText>
         <Input
           type="password"
           placeholder="パスワード"
@@ -55,7 +54,6 @@ export const RegistrationForm = ({
         />
       </ComponentWrapper>
       <ComponentWrapper>
-        <ParagraghText>確認用パスワード：</ParagraghText>
         <Input
           type="password"
           placeholder="確認用パスワード"
@@ -64,11 +62,11 @@ export const RegistrationForm = ({
       </ComponentWrapper>
       <ComponentWrapper>
         {/* NOTE: アイコンのselectタグのselectedのロジック部分の処理を追加する */}
-        <ParagraghText>アイコン：</ParagraghText>
         <Select name="icon" onChange={(e) => selectIcon(e)}>
-          <option value="cat" selected>
-            🐱
+          <option value="" selected>
+            アイコンを選択
           </option>
+          <option value="cat">🐱</option>
           <option value="dog">🐶</option>
           <option value="horse">🐴</option>
           <option value="pig">🐷</option>
@@ -77,10 +75,9 @@ export const RegistrationForm = ({
         </Select>
       </ComponentWrapper>
       <ComponentWrapper>
-        <ParagraghText>生年月日：</ParagraghText>
         <Input type="date" onChange={(e) => changeBirthday(e)} />
       </ComponentWrapper>
-      <ComponentWrapper>
+      <ComponentWrapper margintop="15">
         <RadioBtnWrapper>
           <ParagraghText>性別：</ParagraghText>
           <RadioWrapper>
@@ -91,7 +88,7 @@ export const RegistrationForm = ({
               onChange={(e) => selectGender(e)}
             />
             <RadioLabel>
-              <RadioText>男</RadioText>
+              <RadioText>男性</RadioText>
             </RadioLabel>
           </RadioWrapper>
           <RadioWrapper>
@@ -102,12 +99,12 @@ export const RegistrationForm = ({
               onChange={(e) => selectGender(e)}
             />
             <RadioLabel>
-              <RadioText>女</RadioText>
+              <RadioText>女性</RadioText>
             </RadioLabel>
           </RadioWrapper>
         </RadioBtnWrapper>
       </ComponentWrapper>
-      <ComponentWrapper flexdirection={"center"}>
+      <ComponentWrapper flexdirection={"center"} margintop="10">
         <input
           type="checkbox"
           id="agreement"
@@ -120,7 +117,7 @@ export const RegistrationForm = ({
         </LinkText>
         <label htmlFor="agreement">に同意します。</label>
       </ComponentWrapper>
-      <ComponentWrapper flexdirection="center">
+      <ComponentWrapper flexdirection="center" margintop="10">
         <Link to="/signin">既にユーザー登録を完了している方はこちら</Link>
       </ComponentWrapper>
       <SubmitButton type="submit">新規登録する</SubmitButton>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import keyframes from "styled-components";
 import { breakpoints } from "./breakPoint";
 
 export const AppWrapper = styled.div`
@@ -34,6 +35,7 @@ export const Div = styled.div`
 
 export const ComponentWrapper = styled.div<{
   flexdirection?: string;
+  margintop?: string;
 }>`
   display: flex;
   justify-content: center;
@@ -43,10 +45,12 @@ export const ComponentWrapper = styled.div<{
 
   @media screen and (min-width: ${breakpoints.phone}) {
     width: 350px;
+    margin-top: 8px;
   }
 
   @media screen and (min-width: ${breakpoints.tablet}) {
     width: 450px;
+    margin-top: ${(props) => (props.margintop ? props.margintop : "30px")};
   }
 
   @media screen and (min-width: ${breakpoints.desktop}) {
@@ -86,15 +90,17 @@ export const Form = styled.form`
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
-  padding: 5px 5px 15px;
   min-height: 500px;
+  overflow: hidden;
 
   @media screen and (min-width: ${breakpoints.tablet}) {
     width: 600px;
+    padding: 15px;
   }
 
   @media screen and (min-width: ${breakpoints.desktop}) {
     width: 850px;
+    padding: 25px;
   }
 `;
 export const SubmitButton = styled.button`
@@ -126,6 +132,7 @@ export const Select = styled.select`
 
   @media screen and (min-width: ${breakpoints.tablet}) {
     width: 450px;
+    height: 50px;
   }
 
   @media screen and (min-width: ${breakpoints.desktop}) {
@@ -135,7 +142,7 @@ export const Select = styled.select`
 
 export const RadioBtnWrapper = styled.div`
   display: flex;
-  margin-top: 15px;
+  // margin-top: 15px;
 
   @media screen and (min-width: ${breakpoints.phone}) {
     width: 350px;
@@ -158,7 +165,7 @@ export const RadioWrapper = styled.label`
   user-select: none;
 
   @media screen and (min-width: ${breakpoints.phone}) {
-    margin-right: 80px;
+    margin-left: 100px;
   }
 `;
 
@@ -196,6 +203,8 @@ export const RadioLabel = styled.span`
 export const RadioText = styled.span`
   font-size: 16px;
   margin-left: 25px;
+  display: inline-block;
+  width: 100px;
 `;
 
 export const LinkText = styled.a`

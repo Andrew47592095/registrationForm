@@ -7,6 +7,7 @@ export type RegisterInfo = {
   dateOfBirth: string;
   gender: string;
   agree: boolean;
+  isSubmitted: boolean;
 };
 
 export type LoginInfo = Pick<RegisterInfo, "emailAddress" | "password">;
@@ -20,7 +21,7 @@ export type LoginProps = {
     e: React.ChangeEvent<HTMLInputElement>,
     authType: string
   ) => void;
-  handleSubmit: (e: React.FormEvent) => void;
+  handleSubmit: (e: React.FormEvent, authType: string) => void;
   state: Pick<RegisterInfo, "emailAddress" | "password">;
 };
 
@@ -39,6 +40,6 @@ export type RegisterProps = {
   changeBirthday: (e: React.ChangeEvent<HTMLInputElement>) => void;
   selectGender: (e: React.ChangeEvent<HTMLInputElement>) => void;
   agreeTermsAndCondition: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent) => void;
+  handleSubmit: (e: React.FormEvent, authType: string) => void;
   state: RegisterInfo;
 };

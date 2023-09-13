@@ -42,7 +42,7 @@ export const LoginForm = ({
       <ComponentWrapper flexdirection="center">
         <LinkText>パスワードを忘れた方はこちら</LinkText>
       </ComponentWrapper>
-      <SubmitButton type="submit">新規登録する</SubmitButton>
+      <SubmitButton type="submit">ログイン</SubmitButton>
     </Form>
   );
 };

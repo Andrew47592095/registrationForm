@@ -11,8 +11,10 @@ import { auth } from "./firebase/firebase";
 import { useReducer } from "react";
 import {
   createUserWithEmailAndPassword,
-  updateCurrentUser,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
+import { database } from "./firebase/firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 function App() {
   const [registerState, registerDispatch] = useReducer(
@@ -40,11 +42,12 @@ function App() {
         type: "CHANGE_EMAIL",
         payload: e.target.value,
       });
+    } else {
+      loginDispatch({
+        type: "CHANGE_EMAIL",
+        payload: e.target.value,
+      });
     }
-    loginDispatch({
-      type: "CHANGE_EMAIL",
-      payload: e.target.value,
-    });
   };
 
   const changePassword = (
@@ -56,11 +59,12 @@ function App() {
         type: "CHANGE_PASSWORD",
         payload: e.target.value,
       });
+    } else {
+      loginDispatch({
+        type: "CHANGE_PASSWORD",
+        payload: e.target.value,
+      });
     }
-    loginDispatch({
-      type: "CHANGE_PASSWORD",
-      payload: e.target.value,
-    });
   };
 
   const confirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +89,6 @@ function App() {
   };
 
   const selectGender = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     registerDispatch({
       type: "SELECT_GENDER",
       payload: e.target.value,
@@ -102,38 +105,52 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent, authType: string) => {
     e.preventDefault();
-
+    registerDispatch({
+      type: "SUBMIT"
+    })
+    console.log();
     if (authType === "signup") {
-      registerDispatch({
-        type: "SUBMIT",
-        userInfo: registerState,
-      });
+      registerUserInfo(registerState.emailAddress, registerState.password);
+    } else {
+      signinToMyPage(loginState.emailAddress, loginState.password);
     }
 
-    // try {
-    //   const userCredential = await createUserWithEmailAndPassword(
-    //   auth,
-    //   registerState.emailAddress,
-    //   registerState.password
-    // } catch (error) {
-    //   console.log(error);
+    // registerUserInfo(registerState.emailAddress, registerState.password);
+    // if (authType === "signin") {
+    //   signinToMyPage(registerState.emailAddress, registerState.password);
     // }
-    console.log(registerState);
-
-    onSubmit(registerState.emailAddress, registerState.password);
   };
 
-  const onSubmit = async (email: string, password: string) => {
+  const registerUserInfo = async (email: string, password: string) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        if (user) {
+          addDoc(collection(database, "users"), {
+            email: registerState.emailAddress,
+            username: registerState.userName,
+            icon: registerState.icon,
+            gender: registerState.gender,
+            dataOfBirth: registerState.dateOfBirth,
+          });
+        }
+        console.log("user registered!!");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        console.log(errorMessage);
+      });
+  };
 
+  const signinToMyPage = async (email: string, password: string) => {
+    // console.log(email, password);
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
