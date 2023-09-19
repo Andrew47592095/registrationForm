@@ -31,12 +31,13 @@ export const RegistrationForm = ({
 }: RegisterProps) => {
   return (
     <Form onSubmit={(e) => handleSubmit(e, "signup")}>
-      {state.isSubmitted && <Loading />}
+      {state.isLoading && <Loading />}
       <ComponentWrapper>
         <Input
           type="text"
           placeholder="ユーザー名"
           onChange={(e) => changeUserName(e)}
+          required
         />
       </ComponentWrapper>
       <ComponentWrapper>
@@ -44,6 +45,7 @@ export const RegistrationForm = ({
           type="email"
           placeholder="メールアドレス"
           onChange={(e) => changeEmail(e, "signup")}
+          required
         />
       </ComponentWrapper>
       <ComponentWrapper>
@@ -51,6 +53,7 @@ export const RegistrationForm = ({
           type="password"
           placeholder="パスワード"
           onChange={(e) => changePassword(e, "signup")}
+          required
         />
       </ComponentWrapper>
       <ComponentWrapper>
@@ -58,6 +61,7 @@ export const RegistrationForm = ({
           type="password"
           placeholder="確認用パスワード"
           onChange={(e) => confirmPassword(e)}
+          required
         />
       </ComponentWrapper>
       <ComponentWrapper>
@@ -111,6 +115,7 @@ export const RegistrationForm = ({
           name="agreement"
           checked={state.agree}
           onChange={(e) => agreeTermsAndCondition(e)}
+          required
         />
         <LinkText href="https://menherasenpai.notion.site/457df49475494671807673a0a3346451">
           利用規約

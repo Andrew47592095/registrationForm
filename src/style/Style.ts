@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import keyframes from "styled-components";
 import { breakpoints } from "./breakPoint";
 
 export const AppWrapper = styled.div`

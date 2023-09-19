@@ -1,6 +1,7 @@
 import { RegistrationForm } from "./view/RegistrationForm";
 import { LoginForm } from "./view/LoginForm";
-import { Routes, Route } from "react-router-dom";
+import { RegisterSuccessPage } from "./view/RegisterSuccessPage";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { AppWrapper, Div } from "./style/Style";
 import {
   initialRegisterValue,
@@ -25,6 +26,8 @@ function App() {
     loginReducer,
     initialLoginValue
   );
+
+  const navigate = useNavigate();
 
   const chnageUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
     registerDispatch({
@@ -105,9 +108,17 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent, authType: string) => {
     e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+
     registerDispatch({
-      type: "SUBMIT"
-    })
+      type: "SUBMIT",
+      payload: true,
+    });
+
     console.log();
     if (authType === "signup") {
       registerUserInfo(registerState.emailAddress, registerState.password);
@@ -135,11 +146,22 @@ function App() {
           });
         }
         console.log("user registered!!");
+        setTimeout(() => {
+          navigate("/registersuccess");
+          registerDispatch({
+            type: "SUBMIT",
+            payload: true,
+          });
+        }, 2500);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
+        registerDispatch({
+          type: "SUBMIT",
+          payload: true,
+        });
       });
   };
 
@@ -186,6 +208,7 @@ function App() {
               />
             }
           />
+          <Route path="/registersuccess" element={<RegisterSuccessPage />} />
         </Routes>
       </Div>
     </AppWrapper>

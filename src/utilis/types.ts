@@ -7,7 +7,7 @@ export type RegisterInfo = {
   dateOfBirth: string;
   gender: string;
   agree: boolean;
-  isSubmitted: boolean;
+  isLoading: boolean;
 };
 
 export type LoginInfo = Pick<RegisterInfo, "emailAddress" | "password">;

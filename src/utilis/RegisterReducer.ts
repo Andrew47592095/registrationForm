@@ -9,7 +9,7 @@ const initialRegisterValue = {
   dateOfBirth: "",
   gender: "",
   agree: false,
-  isSubmitted: false
+  isLoading: false,
 };
 
 const registerReducer = (userInfo: RegisterInfo, action) => {
@@ -31,7 +31,7 @@ const registerReducer = (userInfo: RegisterInfo, action) => {
     case "AGREE_TERMS_CONDITION":
       return { ...userInfo, agree: action.payload };
     case "SUBMIT":
-      return { ...userInfo, isSubmitted: true };
+      return { ...userInfo, isLoading: action.payload };
     default: {
       throw Error("Unknown action: " + action.type);
     }
