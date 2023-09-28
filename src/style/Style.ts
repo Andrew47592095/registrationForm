@@ -3,19 +3,18 @@ import { breakpoints } from "./breakPoint";
 
 export const AppWrapper = styled.div`
   background: linear-gradient(45deg, #08aeea, #b721ff);
-
   display: flex;
   justify-content: center;
-  min-height: 680px;
+  height: 100vh;
 
   @media screen and (min-width: ${breakpoints.phone}) {
     font-size: 14px;
     padding: 5px 15px 5px 15px;
   }
 
-  @media screen and (min-width: ${breakpoints.desktop}) {
+  @media screen and (min-width: ${breakpoints.tablet}) {
     font-size: 16px;
-    padding: 10px 100px 50px 100px;
+    padding: 30px 100px 50px 100px;
   }
 `;
 
@@ -89,16 +88,18 @@ export const Form = styled.form`
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
-  min-height: 500px;
+  height: 500px;
   overflow: hidden;
 
   @media screen and (min-width: ${breakpoints.tablet}) {
     width: 600px;
+    height: 700px;
     padding: 15px;
   }
 
   @media screen and (min-width: ${breakpoints.desktop}) {
     width: 850px;
+    height: 800px;
     padding: 25px;
   }
 `;
