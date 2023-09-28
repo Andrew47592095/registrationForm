@@ -16,6 +16,7 @@ import {
 } from "../style/Style";
 import { RegisterProps } from "../utilis/types";
 import { Loading } from "../component/Loading";
+import { ErrorMessage } from "../component/ErrorMessage";
 
 export const RegistrationForm = ({
   state,
@@ -64,7 +65,16 @@ export const RegistrationForm = ({
           required
         />
       </ComponentWrapper>
-      <ComponentWrapper>
+      {state.confirmPassword !== state.password && !!state.confirmPassword && (
+        <ErrorMessage errorMsg={"パスワードが正しくありません。"} />
+      )}
+      <ComponentWrapper
+        margintop={
+          state.password !== state.confirmPassword && !!state.confirmPassword
+            ? "0"
+            : "30px"
+        }
+      >
         {/* NOTE: アイコンのselectタグのselectedのロジック部分の処理を追加する */}
         <Select name="icon" onChange={(e) => selectIcon(e)}>
           <option value="" selected>
@@ -125,7 +135,12 @@ export const RegistrationForm = ({
       <ComponentWrapper flexdirection="center" margintop="10">
         <Link to="/signin">既にユーザー登録を完了している方はこちら</Link>
       </ComponentWrapper>
-      <SubmitButton type="submit">新規登録する</SubmitButton>
+      <SubmitButton
+        type="submit"
+        disabled={state.password !== state.confirmPassword ? true : false}
+      >
+        新規登録する
+      </SubmitButton>
     </Form>
   );
 };

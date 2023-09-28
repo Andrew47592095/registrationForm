@@ -88,7 +88,7 @@ export const Form = styled.form`
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
-  height: 500px;
+  height: 600px;
   overflow: hidden;
 
   @media screen and (min-width: ${breakpoints.tablet}) {

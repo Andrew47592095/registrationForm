@@ -75,6 +75,7 @@ function App() {
       type: "CONFIRM_PASSWORD",
       payload: e.target.value,
     });
+    console.log(e.target.value);
   };
 
   const selectIcon = (e: React.ChangeEvent<HTMLInputElement>) => {
